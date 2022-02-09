@@ -2,19 +2,76 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Password encrypter</title>
+        <title>Plain text encrypter</title>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <!-- /Google Fonts -->
         <style>
-            p {
-                white-space: pre;
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            div {
+                margin: 10px 0;
+            }
+
+            textarea {
+                border: 1px solid black;
+                width: 100%;
+                overflow-y: hidden;
+                resize: none;
+            }
+
+            .content {
+                width: 50%;
+                margin: 0 25%;
+            }
+
+            textarea,
+            input,
+            output {
+                font-size: 16px;
+                font-family: 'Courier New', Courier, monospace;
+            }
+
+            output {
+                display: block;
+                word-break: break-all;
+                white-space: pre-wrap;
+                border: 1px solid black;
+                min-height: 10px;
             }
         </style>
     </head>
     <body>
-        <textarea id="input"></textarea>
-        <input id="password" type="text" />
-        <button onclick="handleEncodeClick()">Encode</button>
-        <button onclick="handleDecodeClick()">Decode</button>
-        <p id="output"></p>
+        <div class="content">
+            <div>
+                <h1>Plain text encrypter</h1>
+            </div>
+            <div>
+                <h2>Input</h2>
+                <textarea id="input"></textarea>
+            </div>
+            <div>
+                <h2>Password</h2>
+                <input id="password" type="text" />
+            </div>
+            <div>
+                <h2>Actions</h2>
+                <button id="encode_button">Encode</button>
+                <button id="decode_button">Decode</button>
+            </div>
+            <div>
+                <h2>Output</h2>
+                <button id="copy_to_clipboard_button">Copy to clipboard</button>
+                <output id="output"></output>
+            </div>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
             integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
         <script>
@@ -26,11 +83,24 @@
                 return CryptoJS.AES.decrypt(toDecode, password).toString(CryptoJS.enc.Utf8);
             }
 
+            function copyToClipboard(message) {
+                navigator.clipboard.writeText(message).then(
+                    () => {},
+                    () => {
+                        alert("Couldn't copy text to clipboard!");
+                    }
+                );
+            }
+
+            function autoResizeElement(element) {
+                element.style.height = "auto";
+                element.style.height = element.scrollHeight + "px";
+            }
+
             function handleEncodeClick() {
                 toEncode = document.getElementById('input').value;
                 password = document.getElementById('password').value;
                 let result = encode(toEncode, password);
-                console.log(result);
                 document.getElementById('output').innerHTML = result;
             }
 
@@ -38,9 +108,24 @@
                 toDecode = document.getElementById('input').value;
                 password = document.getElementById('password').value;
                 let result = decode(toDecode, password);
-                console.log(result);
                 document.getElementById('output').innerHTML = result;
             }
+
+            function handleCopyToClipboardClick() {
+                toCopy = document.getElementById('output').innerHTML;
+                copyToClipboard(toCopy);
+            }
+
+            function handleInput(event) {
+                const input = event.target;
+                autoResizeElement(input);
+            }
+
+            autoResizeElement(document.getElementById('input'));
+            document.getElementById('encode_button').addEventListener('click', handleEncodeClick);
+            document.getElementById('decode_button').addEventListener('click', handleDecodeClick);
+            document.getElementById('copy_to_clipboard_button').addEventListener('click', handleCopyToClipboardClick);
+            document.getElementById('input').addEventListener('input', handleInput);
         </script>
     </body>
 </html>

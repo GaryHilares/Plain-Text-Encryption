@@ -9,8 +9,7 @@
 </p>
 
 ## What is Plain Text Encryption?
-Plain Text Encryption
-
+Plain Text Encryption is a simple website that allows you to encrypt and decrypt text using the AES cryptographic algorithm.
 
 ### Platforms
 - Google Chrome
@@ -21,7 +20,7 @@ Plain Text Encryption
 None.
 
 ## Motivation
-Requested by another user.
+Another user requested me help to encrypt/decrypt his passwords securely, so I made a simple website that allowed him to do it himself.
 
 ## Installation and usage
 Open `index.html` and you're ready to go.

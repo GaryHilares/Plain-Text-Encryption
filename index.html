@@ -31,6 +31,15 @@
                 margin: 0 25%;
             }
 
+            .selectable {
+                -webkit-touch-callout: all;
+                -webkit-user-select: all;
+                -khtml-user-select: all;
+                -moz-user-select: all;
+                -ms-user-select: all;
+                user-select: all;
+            }
+
             textarea,
             input,
             output {
@@ -72,7 +81,7 @@
             <div>
                 <h2>Output</h2>
                 <button id="copy_to_clipboard_button">Copy to clipboard</button>
-                <output id="output"></output>
+                <output class="selectable" id="output"></output>
             </div>
         </div>
         <script>

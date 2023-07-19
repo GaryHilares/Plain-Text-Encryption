@@ -25,9 +25,8 @@ Another user requested me help to encrypt/decrypt his passwords securely, so I m
 ## Installation and usage
 Open `index.html` and you're ready to go.
 
-
 ## Contributors
-Thanks to these wonderful people for making Chess possible!
+Thanks to these wonderful people for making Plain Txt Encryption possible!
 
 <p align="center"><a href="https://github.com/GaryHilares/Plain-Text-Encryption/graphs/contributors"><img src="https://contrib.rocks/image?repo=GaryHilares/Plain-Text-Encryption"></a></p>
 
